@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>One Punch Man - Tamil</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Set the favicon -->
+    <link rel="icon" type="image/png" href="static/logo.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Raleway", sans-serif
+        }
+
+        body {
+            width: 100%;
+            min-height: 100%;
+            background: #050505;
+            position: relative;
+            color: #fff;
+            padding: 0;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .main-content {
+            border-radius: 4px;
+            background-color: #1a1a1a;
+            background-attachment: fixed;
+            background-position: 50% 10%;
+            background-size: 1500px;
+            border-radius: 5px;
+            padding: 0;
+            max-width: 95%;
+            margin: 0 auto;
+            width: 60rem;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .main-content article {
+            padding-bottom: 1.5em;
+            padding: 1em;
+            display: flex;
+        }
+
+        .main-content article aside {
+            flex-grow: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-content article picture {
+            width: 11em;
+            margin-right: 1.4em;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: .5em;
+            max-height: 19em;
+        }
+
+        .logo-end {
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .chapter-link {
+            text-decoration: none;
+        }
+
+        .chapter-link:hover {
+            color: #fa7b7b;
+        } 
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo" style="white-space:nowrap;">
+            <img class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity" src="static/logo.png" alt="OPM" 
+            style="width: 150px;" />
+        </div>
+    </header>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="main-content">
+        <article>
+            <aside>
+                <picture>
+                    <source type="image/webp" srcset class="img-fluid" alt="One Punch Man manga" />
+                    <img src="static/Volume6.jpg"
+                        class="img-fluid" alt="One Punch Man manga" />
+                </picture>
+                <table class="w3-table">
+                    <tbody>
+                        <tr>
+                            <th>Author</th>
+                            <td class="text-sm">One</td>
+                        </tr>
+                        <tr>
+                            <th>Artist</th>
+                            <td class="text-sm">Yusuke Murta</td>
+                        </tr>
+                        <tr>
+                            <th>Transalation <br>& Typeset</th>
+                            <td class="text-sm">Pulavar Logrythm</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a class="w3-button w3-pink" href="https://mangadex.org/chapter/74701d27-9f03-4887-a355-57d4ad610ade/1" target="_blank"> Start reading  <i class="fa fa-caret-right"></i></a>
+            </aside>
+            <content>
+                <h1>One Punch Man</h1>
+                <p>தமிழில் One Punch Man. A Fan translation!</p>
+                <p>If you are interested in contributing,
+                    please reachout to me on 
+                    <br><b>Instagram:</b> <span style="font-family: 'Courier New', Courier, monospace;">pulavar_logrythm</span>
+                    <br><b>Mail:</b> <span style="font-family: 'Courier New', Courier, monospace;">logrythm@tutanota.com</span>
+                </p>
+            </content>
+        </article>
+
+        <div class="w3-panel">
+            <div class="w3-row-padding" style="margin:0 -16px">
+                <div class="w3-center">
+                    <table class="w3-table w3-bordered" id="chapterTable">
+                        <tr><th>Chapter - Title</th> <th>Last Updated</th></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="logo-end" style="white-space:nowrap;">
+        <img class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity" src="static/logo.png" alt="OPM" 
+        style="width: 150px;" />
+    </div>
+</body>
+<script>
+    function timestampToDateString(timestamp) {
+        // Create a new Date object with the timestamp
+        var date = new Date(timestamp);
+        
+        // Get the various date components
+        var year = date.getFullYear();
+        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Month is zero-based
+        var day = ('0' + date.getDate()).slice(-2);
+        
+        // Construct the date string in the format YYYY-MM-DD
+        var dateString = year + '-' + month + '-' + day;
+        
+        return dateString;
+    }
+
+    function loadJSON() {
+        fetch('./static/chapters.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(chapters => {
+                tableData = '<tr><th>Chapter - Title</th> <th>Last Updated</th></tr>'
+                chapters.sort((a, b) => b['chapter'] - a['chapter']);
+                chapters.forEach(chapter => {
+                    tableData += '<tr><td><a class="chapter-link" href="' + chapter['link'] + '" target="_blank">' + chapter['chapter'] + ' - ' + chapter['title'] + '</a></td> <td>' + timestampToDateString(chapter['updated_at']*1000) + '</td></tr>'
+                });
+                document.getElementById('chapterTable').innerHTML = tableData;
+            })
+            .catch(error => {
+                console.error('There was a problem while fetching the Chapters Data:', error);
+            });
+    }
+    loadJSON()
+</script>
+</html>
